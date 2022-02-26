@@ -1,0 +1,25 @@
+.layout {
+  height: 100%;
+}
+
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.content {
+  margin-top: 64px; // Header height
+  padding: 20px 50px;
+}
+
+@media only screen and (max-width: 576px) {
+  .header {
+    padding: 0;
+  }
+
+  .content {
+    padding: 10px;
+  }
+}
