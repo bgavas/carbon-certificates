@@ -1,3 +1,21 @@
 .certificateTableCol {
-  max-width: 790px;
+  max-width: 1070px;
+}
+
+.titleWrapper {
+  display: flex;
+  background-color: white;
+  border-radius: 8px;
+  padding: 4px 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 0;
+}
+
+.titleIcon {
+  font-size: 18px;
+  margin-right: 10px;
 }

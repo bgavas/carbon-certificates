@@ -98,7 +98,7 @@ const CertificateCard: FC<Props> = ({
   };
 
   return (
-    <Row className={classes.card} gutter={8}>
+    <Row className={classes.card} gutter={16}>
       {/* Unique id */}
       <Col className={classes.uniqueIdCol}>
         {renderUniqueIdCell()}

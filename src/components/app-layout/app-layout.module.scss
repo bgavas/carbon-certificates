@@ -1,6 +1,5 @@
 .layout {
   height: 100%;
-  overflow: auto;
 }
 
 .header {
@@ -12,7 +11,9 @@
 
 .content {
   margin-top: 64px; // Header height
-  padding: 20px 50px;
+  padding: 20px 50px 50px 50px;
+  height: 100%;
+  overflow: auto;
 }
 
 @media only screen and (max-width: 576px) {

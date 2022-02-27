@@ -1,26 +1,19 @@
 .card {
-  background-color: white;
+  background-color: transparent;
   border-radius: 6px;
   padding: 12px 10px;
 }
 
 .text {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: bold;
+  color: gray;
 }
 
 .textWrapper {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: pre;
-}
-
-.uniqueIdTextWrapper {
-  cursor: pointer;
-}
-
-.uniqueIdWrapper {
-  cursor: pointer;
 }
 
 .uniqueIdCol {
@@ -45,14 +38,4 @@
 
 .statusCol {
   width: 100px;
-}
-
-.favoriteCol {
-  width: 50px;
-  text-align: center;
-}
-
-.favoriteIcon {
-  width: 16px;
-  cursor: pointer;
 }
