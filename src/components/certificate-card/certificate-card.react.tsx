@@ -1,23 +1,30 @@
 import { Col, message, Row, Tooltip } from 'antd';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Certificate } from '../../api/interfaces/certificate.interface';
 import classes from './certificate-card.module.scss';
-import saveIcon from './../../assets/save.png';
-import saveFilledIcon from './../../assets/save-filled.png';
+import favoriteIcon from './../../assets/favorite.png';
+import favoriteFilledIcon from './../../assets/favorite-filled.png';
 
 type Props = {
   certificate: Certificate,
 };
 
-interface RenderCellStyles {
-  width?: string;
-  maxWidth?: string;
-}
-
 const CertificateCard: FC<Props> = ({
   certificate,
 }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(
+    () => {
+      const favoriteCertificates = localStorage.getItem('favoriteCertificates');
+      const cert = JSON.parse(favoriteCertificates || '{}')[certificate.uniqueNumber];
+      setIsFavorite(!!cert);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+
   const handleCertificateIdCopy = () => {
     message.info({
       content: 'Certificate ID copied to the clipboard',
@@ -27,8 +34,28 @@ const CertificateCard: FC<Props> = ({
     });
   };
 
-  const handleSave = () => {
-    
+  const handleAddToFavorites = () => {
+    const id = certificate.uniqueNumber;
+    // Get and parse certificates
+    const tmpCerts: any = localStorage.getItem('favoriteCertificates') || '{}';
+    const parsedCerts = JSON.parse(tmpCerts);
+
+    // Add certificate to favorites
+    parsedCerts[id] = certificate;
+    localStorage.setItem('favoriteCertificates', JSON.stringify(parsedCerts));
+    setIsFavorite(true);
+  };
+
+  const handleRemoveFromFavorites = () => {
+    const id = certificate.uniqueNumber;
+    // Get and parse certificates
+    const tmpCerts: any = localStorage.getItem('favoriteCertificates') || '{}';
+    const parsedCerts = JSON.parse(tmpCerts);
+
+    // Remove certificate from favorites
+    delete parsedCerts[id];
+    localStorage.setItem('favoriteCertificates', JSON.stringify(parsedCerts));
+    setIsFavorite(false);
   };
 
   const renderCell = (
@@ -39,26 +66,42 @@ const CertificateCard: FC<Props> = ({
     </div>
   );
 
-  const renderUniqueIdCell = (
-    r: number | string,
-  ) => (
+  const renderUniqueIdCell = () => (
     <CopyToClipboard
       text={certificate.uniqueNumber}
       onCopy={handleCertificateIdCopy}
     >
       <Tooltip title="Click to copy the certificate ID" placement="bottom">
         <div className={`${classes.textWrapper} ${classes.uniqueIdTextWrapper}`}>
-          <span className={classes.text}>{r}</span>
+          <span className={classes.text}>{certificate.uniqueNumber}</span>
         </div>
       </Tooltip>
     </CopyToClipboard>
   );
 
+  const renderFavoriteIcon = () => {
+    return (
+      isFavorite ?
+      <img
+        alt="favorite"
+        src={favoriteFilledIcon}
+        className={classes.favoriteIcon}
+        onClick={handleRemoveFromFavorites}
+      /> :
+      <img
+        alt="not-favorite"
+        src={favoriteIcon}
+        className={classes.favoriteIcon}
+        onClick={handleAddToFavorites}
+      />
+    );
+  };
+
   return (
     <Row className={classes.card} gutter={8}>
       {/* Unique id */}
       <Col className={classes.uniqueIdCol}>
-        {renderUniqueIdCell(certificate.uniqueNumber)}
+        {renderUniqueIdCell()}
       </Col>
       {/* Originator */}
       <Col className={classes.originatorCol}>
@@ -80,14 +123,9 @@ const CertificateCard: FC<Props> = ({
       <Col className={classes.statusCol}>
         {renderCell(certificate.status)}
       </Col>
-      {/* Save icon */}
-      <Col className={classes.saveCol}>
-        <img
-          alt="save"
-          src={saveIcon}
-          className={classes.saveIcon}
-          onClick={handleSave}
-        />
+      {/* Favorite icon */}
+      <Col className={classes.favoriteCol}>
+        {renderFavoriteIcon()}
       </Col>
     </Row>
   );
