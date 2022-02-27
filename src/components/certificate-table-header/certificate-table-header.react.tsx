@@ -12,7 +12,7 @@ const CertificateTableHeader: FC = () => {
   );
 
   return (
-    <Row className={classes.card} gutter={16}>
+    <Row className={classes.card} gutter={16} wrap={false}>
       {/* Unique id */}
       <Col className={classes.uniqueIdCol}>
         {renderCell('UNIQUE ID')}
