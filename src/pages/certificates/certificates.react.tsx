@@ -30,7 +30,7 @@ const Certificates: FC = () => {
             <Row justify="center">
               <div className={classes.titleWrapper}>
                 <FileProtectOutlined className={classes.titleIcon} />
-                <h2 className={classes.title}>Certificates</h2>
+                <h2 className={classes.title}>Certificates ({certificateMeta?.total || 0})</h2>
               </div>
             </Row>
           </Col>
@@ -61,6 +61,7 @@ const Certificates: FC = () => {
                   pageSize={pagination.perPage}
                   current={pagination.page}
                   total={certificateMeta?.total}
+                  showSizeChanger
                   onChange={handlePaginationChange}
                 />
               </Col>

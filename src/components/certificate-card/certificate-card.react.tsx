@@ -8,10 +8,12 @@ import favoriteFilledIcon from './../../assets/favorite-filled.png';
 
 type Props = {
   certificate: Certificate,
+  onRemove?: () => void;
 };
 
 const CertificateCard: FC<Props> = ({
   certificate,
+  onRemove,
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -56,6 +58,7 @@ const CertificateCard: FC<Props> = ({
     delete parsedCerts[id];
     localStorage.setItem('favoriteCertificates', JSON.stringify(parsedCerts));
     setIsFavorite(false);
+    onRemove?.();
   };
 
   const renderCell = (
