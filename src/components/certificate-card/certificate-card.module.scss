@@ -1,0 +1,57 @@
+.card {
+  background-color: white;
+  border-radius: 6px;
+  padding: 12px 10px;
+}
+
+.text {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.textWrapper {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: pre;
+}
+
+.uniqueIdTextWrapper {
+  cursor: pointer;
+}
+
+.uniqueIdWrapper {
+  cursor: pointer;
+}
+
+.uniqueIdCol {
+  width: 200px;
+}
+
+.originatorCountryCol {
+  width: 180px;
+}
+
+.originatorCountryCol {
+  width: 30px;
+}
+
+.ownerCol {
+  width: 180px;
+}
+
+.ownerCountryCol {
+  width: 30px;
+}
+
+.statusCol {
+  width: 60px;
+}
+
+.saveCol {
+  width: 30px;
+}
+
+.saveIcon {
+  width: 16px;
+  cursor: pointer;
+}
